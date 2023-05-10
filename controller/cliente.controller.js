@@ -102,7 +102,10 @@ const eliminarCliente = async (req = request, res = response) => {
       ok: true,
       msg: `Cliente ${cliente.nombre} - ${cliente.apellido} eliminado de forma correcta!!`,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ ok: false, msg: "Hubo un error" });
+  }
 };
 export {
   obtenerClientes,

@@ -1,8 +1,9 @@
 import express, { urlencoded } from "express";
 import morgan from "morgan";
 import cors from "cors";
+import bodyParser from "body-parser";
 
-import { clienteRouter } from "../routes/index.js";
+import { clienteRouter, productoRouter } from "../routes/index.js";
 import { dbConnect } from "../config/db.js";
 class Server {
   constructor() {
@@ -13,7 +14,7 @@ class Server {
     this.dbConnection();
   }
   middlewares() {
-    this.app.use(express.json());
+    this.app.use(bodyParser.json());
     this.app.use(urlencoded({ extended: true }));
     this.app.use(morgan("dev"));
     this.app.use((req, res, next) => {
@@ -29,6 +30,7 @@ class Server {
   }
   routes() {
     this.app.use("/api", clienteRouter);
+    this.app.use("/api", productoRouter);
   }
   async dbConnection() {
     await dbConnect();

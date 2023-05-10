@@ -1,4 +1,4 @@
-import express, { query } from "express";
+import express from "express";
 import {
   actualizarCliente,
   crearCliente,
@@ -9,16 +9,9 @@ import {
 import { body, param } from "express-validator";
 const router = express.Router();
 
-/**
- * Validaciones
- * - name: required y no vacio
- * - email: required, no vacio, unico
- * - apellidos:
- * - empresa:
- * - telefono: no vacio
- */
-
+/**  Obtener todos los clientes **/
 router.get("/clientes", obtenerClientes);
+/** Crear un nuevo cliente **/
 router.post(
   "/clientes",
   [
@@ -32,6 +25,7 @@ router.post(
   ],
   crearCliente
 );
+/** Obtener cliente por ID **/
 router.get(
   "/clientes/:id",
   param("id", "El id es obligatorio y debe ser un mongo Id")
@@ -39,6 +33,7 @@ router.get(
     .notEmpty(),
   obtenerClientesPorId
 );
+/** Actualizar cliente por ID **/
 router.put(
   "/clientes/:id",
   [
@@ -55,6 +50,7 @@ router.put(
   ],
   actualizarCliente
 );
+/** Eliminar cliente por ID **/
 router.delete(
   "/clientes/:id",
   param("id", "El id es obligatorio y debe ser un mongo Id")
