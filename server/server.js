@@ -3,7 +3,11 @@ import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import { clienteRouter, productoRouter } from "../routes/index.js";
+import {
+  clienteRouter,
+  productoRouter,
+  pedidoRouter,
+} from "../routes/index.js";
 import { dbConnect } from "../config/db.js";
 class Server {
   constructor() {
@@ -31,6 +35,7 @@ class Server {
   routes() {
     this.app.use("/api", clienteRouter);
     this.app.use("/api", productoRouter);
+    this.app.use("/api", pedidoRouter);
   }
   async dbConnection() {
     await dbConnect();
